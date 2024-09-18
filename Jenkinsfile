@@ -4,11 +4,11 @@ pipeline {
         BUILD_ID = 'dontKillMe'
     }
     stages {
-        stage('Checkout Code') {
-            steps {
-                 git branch: 'main', url: 'https://github.com/nikitsrj/sample-java-springboot.git'
-            }
-        }
+        // stage('Checkout Code') {
+        //     steps {
+        //          git branch: 'main', url: 'https://github.com/nikitsrj/sample-java-springboot.git'
+        //     }
+        // }
         stage('Build') {
             steps {
                 sh 'mvn clean install'
@@ -16,9 +16,7 @@ pipeline {
         }
         stage('Run Application') {
             steps {
-                sh '''
-                nohup java -jar target/hello-world-webapp-1.0-SNAPSHOT.jar --server.port=80 > app.log 2>&1 &
-                '''
+                sh 'JENKINS_NODE_COOKIE=dontKillMe nohup java -jar target/hello-world-webapp-1.0-SNAPSHOT.jar --server.port=80 > app.log 2>&1 & '
             }
         }
     }
