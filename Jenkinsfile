@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-        BUILD_ID = 'dontKillMe'
-    }
     stages {
         // stage('Checkout Code') {
         //     steps {
